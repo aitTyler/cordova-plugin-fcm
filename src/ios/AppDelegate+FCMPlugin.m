@@ -122,14 +122,19 @@ NSString *const kGCMMessageIDKey = @"gcm.message_id";
     
     // Print full message.
     NSLog(@"%@", userInfo);
-    
+
+    /*
     NSError *error;
     NSDictionary *userInfoMutable = [userInfo mutableCopy];
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:userInfoMutable
                                                        options:0
                                                          error:&error];
     [FCMPlugin.fcmPlugin notifyOfMessage:jsonData];
+	*/
     
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"title"] message:[[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] objectForKey:@"body"]delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show]; 
+
     // Change this to your preferred presentation option
     completionHandler(UNNotificationPresentationOptionNone);
 }
